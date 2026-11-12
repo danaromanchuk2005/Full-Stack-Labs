@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ album.title }} ({{ album.year }})</h2>
+<p class="lead">{{ album.description }}</p>
+<a href="{{ url_for('albums') }}" class="btn btn-secondary">Назад до списку</a>
+{% endblock %}

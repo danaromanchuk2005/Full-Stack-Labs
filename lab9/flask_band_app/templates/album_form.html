@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ action }} альбом</h2>
+<form method="POST">
+    <div class="mb-3">
+        <label>Назва альбому</label>
+        <input type="text" name="title" class="form-control" value="{{ album.title if album else '' }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Рік випуску</label>
+        <input type="number" name="year" class="form-control" value="{{ album.year if album else '2026' }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Опис</label>
+        <textarea name="description" class="form-control" rows="4" required>{{ album.description if album else '' }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-success">Зберегти</button>
+    <a href="{{ url_for('albums') }}" class="btn btn-secondary">Скасувати</a>
+</form>
+{% endblock %}

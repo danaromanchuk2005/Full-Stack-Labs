@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Гурт "Синтаксис"</title>
+    <!-- Підключаємо Bootstrap для красивого дизайну без написання CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('index') }}">🎸 Гурт "Синтаксис"</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">Про проєкт</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('history') }}">Історія гурту</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('albums') }}">Альбоми</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    {% if session.get('logged_in') %}
+                        <li class="nav-item"><a class="nav-link text-warning" href="{{ url_for('logout') }}">Вийти (Admin)</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Вхід</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
